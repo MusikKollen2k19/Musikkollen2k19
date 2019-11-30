@@ -17,6 +17,18 @@ Annars kör du `cat ~/.ssh/id_rsa.pub` och kopierar från ssh.rsa till innan dit
 Gå in på [Github](https://github.com/settings/keys) > settings > SSH and GPG keys och följ instruktionerna
 
 
-## annat
+## Api Struktur
 
-user i databasen och ansvarig har samma användarnamn
+https://km1wzv5ri1.execute-api.us-east-1.amazonaws.com/v1
+
+GET - hämta alla skolors info
+
+PUT - ladda upp ny data
+Exempel body:
+
+
+{
+  "Ansvarig": "abb_person",
+  "pass": "<SHA-256 hash av lösenord>",
+  "Amount": 10
+}
