@@ -15,3 +15,8 @@ Detta vet du om du kör (i bash) `ssh git@github.com` och får tillbaka ditt anv
 Annars kör du `cat ~/.ssh/id_rsa.pub` och kopierar från ssh.rsa till innan ditt användarnamn
 
 Gå in på [Github](https://github.com/settings/keys) > settings > SSH and GPG keys och följ instruktionerna
+
+
+## annat
+
+user i databasen och ansvarig har samma användarnamn
