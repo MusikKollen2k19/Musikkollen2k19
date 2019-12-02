@@ -26,32 +26,21 @@ GET - hämta alla skolors info
 PUT - ladda upp ny data
 Exempel body:
 
-`{`
-
-`  "user": "abb_person",`
-
-`  "pass": "<SHA-256 hash av lösenord>",`
-
-`  "Amount": 10`
-
-`}`
+    {
+      "user": "abb_person",
+      "pass": "<SHA-256 hash av lösenord>",
+      "Amount": 10
+    }
 
 Du kommer att få tillbaka antingen statuskod 200 eller 201 där 200 är bra och 201 är dålig.
 Exempel på response body:
 
-`{`
+    {
+        "Success": false,
+        "Meddelande": "HIttade inte användaren!"
+    }
 
-`    "Success": false,`
-
-`    "Meddelande": "HIttade inte användaren!"`
-
-`}`
-
-
-`{`
-
-`    "Success": true,`
-
-`    "Meddelande": "Uppdaterade Värdet!"`
-
-`}`
+    {
+        "Success": true,
+        "Meddelande": "Uppdaterade Värdet!"
+    }
