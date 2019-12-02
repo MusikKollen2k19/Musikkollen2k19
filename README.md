@@ -67,7 +67,7 @@ Exempel på response body:
         }
     ]
 
-### PUT - ladda upp ny data
+### POST/PUT - ladda upp ny data
 
 Exempel body:
 

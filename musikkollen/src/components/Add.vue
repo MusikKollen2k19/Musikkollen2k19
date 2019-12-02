@@ -3,7 +3,7 @@
     <v-container bg fill-height grid-list-md text-xs-center>
       <v-row>
         <v-flex xs4 offset-4>
-          <v-card max-width="450" tile justify-center align-center class-mx-auto id="a6">
+          <v-card max-width="450" elevation="20" justify-center align-center class-mx-auto id="a6" > 
             <h1 id="a3">Lägg till summa</h1>
             <div class="flex-grow-1"></div>
             <v-tooltip bottom>
@@ -101,10 +101,10 @@ export default {
 
       var log = this.login;
 
-      let body = { user: this.login, pass: sha256(this.password), Amount: this.sek};
+      let body = { user: this.login, pass: sha256(this.password), Amount: parseInt(this.sek)};
       let stringbody = JSON.stringify(body);
-      // console.log(stringbody)
-      axios.put(
+      console.log(stringbody)
+      axios.post(
           "https://km1wzv5ri1.execute-api.us-east-1.amazonaws.com/v1", stringbody
         )
         .then(function(response) {
