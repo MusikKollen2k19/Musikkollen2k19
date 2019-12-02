@@ -24,6 +24,7 @@ https://km1wzv5ri1.execute-api.us-east-1.amazonaws.com/v1
 GET - hämta alla skolors info
 
 PUT - ladda upp ny data
+
 Exempel body:
 
     {
@@ -33,6 +34,7 @@ Exempel body:
     }
 
 Du kommer att få tillbaka antingen statuskod 200 eller 201 där 200 är bra och 201 är dålig.
+
 Exempel på response body:
 
     {
