@@ -19,6 +19,8 @@ Gå in på [Github](https://github.com/settings/keys) > settings > SSH and GPG k
 
 ## Api Struktur
 
+### URL
+
 https://km1wzv5ri1.execute-api.us-east-1.amazonaws.com/v1
 
 ### GET - hämta alla skolors info
