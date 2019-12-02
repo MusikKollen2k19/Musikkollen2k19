@@ -30,22 +30,25 @@
     </v-app-bar>
 
     <v-content>
-      <Hem/>
-      <Chart />
+      <!-- <Hem/>
+      <Chart /> -->
+      <Add/>
     </v-content>
   </v-app>
 </template>
 
 <script>
-import Hem from './components/Hem';
-import Chart from "./components/Chart";
+// import Hem from './components/Hem';
+// import Chart from "./components/Chart";
+import Add from "./components/Add"
 
 export default {
   name: 'App',
 
   components: {
-    Hem,
-    Chart,
+    // Hem,
+    // Chart,
+    Add
   },
 
   data: () => ({
