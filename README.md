@@ -30,7 +30,7 @@ Exempel på response body:
     [
         {
             "CurrentAmount": 110,
-            "Ansvarig": "musikkollen_abbindu",
+            "Ansvarig": "abb_person",
             "Skola": "ABB",
             "LastAmount": [
                 100,
@@ -47,7 +47,7 @@ Exempel på response body:
         },
         {
             "CurrentAmount": -1119,
-            "Ansvarig": "musikkollen_rudbeck",
+            "Ansvarig": "rudbeck_person",
             "Skola": "ABB",
             "LastAmount": [
                 -100,
