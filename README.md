@@ -1,6 +1,7 @@
 # MusikKollen2k19
 
-`/musikkollen` Är hemsidan
+[musikkollen2k19.github.io](https://musikkollen2k19.github.io/)
+
 
 ## Ladda upp nuvarande sida
 
