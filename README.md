@@ -51,7 +51,7 @@ Exempel på response body:
         {
             "CurrentAmount": -1119,
             "Ansvarig": "rudbeck_person",
-            "Skola": "ABB",
+            "Skola": "Rudbeck",
             "LastAmount": [
                 -100,
                 -10,
