@@ -42,6 +42,8 @@ Exempel på response body:
         "Meddelande": "HIttade inte användaren!"
     }
 
+Eller:
+
     {
         "Success": true,
         "Meddelande": "Uppdaterade Värdet!"
