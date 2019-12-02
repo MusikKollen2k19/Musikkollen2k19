@@ -3,7 +3,7 @@
     <v-container bg fill-height grid-list-md text-xs-center>
       <v-row>
         <v-flex xs4 offset-4>
-          <v-card max-width="450" elevation="20" justify-center align-center class-mx-auto id="a6" > 
+          <v-card max-width="450" elevation="20" justify-center align-center class-mx-auto id="a6">
             <h1 id="a3">Lägg till summa</h1>
             <div class="flex-grow-1"></div>
             <v-tooltip bottom>
@@ -53,11 +53,26 @@
                   @click="submit"
                 >Lägg till</v-btn>
               </v-card-actions>
+              <br />
+              <v-alert :type="Alert_type" v-if="Alert">{{ Alert_text }}</v-alert>
             </v-card-text>
           </v-card>
         </v-flex>
       </v-row>
     </v-container>
+    <v-snackbar
+      v-model="snackbar"
+      :vertical="vertical"
+    >
+      {{ snackbar_text }}
+      <v-btn
+        :color="snackbar_type"
+        text
+        @click="snackbar = false"
+      >
+        Close
+      </v-btn>
+    </v-snackbar>
   </v-app>
 </template>
 
@@ -85,52 +100,54 @@ export default {
     ],
     sekRules: [
       v => !!v || "Ett nummer krävs!",
-      v => (v && typeof(v) != 'number') || "Inte ett Nummer!"
-    ]
+      v => (v && typeof v != "number") || "Inte ett Nummer!"
+    ],
+    snackbar: false,
+    snackbar_text: "Fail!",
+    snackbar_type: "success",
+
+    Alert: false,
+    Alert_text: "Fail!",
+    Alert_type: "success"
   }),
   methods: {
-    submit() {
-      // ToDo user gets an id on reg that gets stored in the db next to pass.
-      // user needs an id to remove their devices
-      // lambda checks in database if user and pass hash matches and sends back an id
-      // vuex keeps the id
-      // eslint-disable-next-line
-      console.log(this.$refs.form);
-
-      // if (this.$refs.form.validate()) {
-
+    async submit() {
       var log = this.login;
 
-      let body = { user: this.login, pass: sha256(this.password), Amount: parseInt(this.sek)};
+      let body = {
+        user: this.login,
+        pass: sha256(this.password),
+        Amount: parseInt(this.sek)
+      };
       let stringbody = JSON.stringify(body);
-      console.log(stringbody)
-      axios.post(
-          "https://km1wzv5ri1.execute-api.us-east-1.amazonaws.com/v1", stringbody
-        )
-        .then(function(response) {
-          // eslint-disable-next-line
-          console.log(response);
-        //   if (response.data.success == true && log == "admin") {
-        //     // eslint-disable-next-line
-        //     router.push(
-        //       "/f75778f7425be4db0369d09af37a6c2b9a83dea0e53e7bd57412e4b060e607f7"
-        //     );
-        //     console.log("Du är inloggad som admin");
-        //   } else if (response.data.success == true) {
-        //     router.push("/");
-        //   }
-        })
-        .catch(function(error) {
-          // eslint-disable-next-line
-          console.log(error);
-        });
+      console.log(stringbody);
+      const response = await axios.post(
+        "https://km1wzv5ri1.execute-api.us-east-1.amazonaws.com/v1",
+        stringbody
+      );
+      // eslint-disable-next-line
+      console.log(response);
+      console.log(response.data.Success);
+      this.Alert = true;
+      this.Alert_text = response.data.Meddelande
+      this.snackbar = true;
+      this.snackbar_text = response.data.Meddelande
+
+      if (response.data.Success == true) {
+        this.Alert_type = "success";
+        this.snackbar_type = "success";
+      } else {
+        this.Alert_type = "error";
+        this.snackbar_type = "error";
+      }
+
+
+      // this.snackbar = true;
+
+      // router.push("/");
     }
   }
 };
-
-
-
-// }
 </script>
 
 <style>
