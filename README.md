@@ -28,7 +28,7 @@ Exempel body:
 
 
 {
-  "Ansvarig": "abb_person",
+  "user": "abb_person",
   "pass": "<SHA-256 hash av lösenord>",
   "Amount": 10
 }
