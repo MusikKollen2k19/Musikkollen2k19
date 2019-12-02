@@ -121,8 +121,8 @@ def handler(event, context):
         return {
             'statusCode': 201,
             'headers': {
-                    'Content-Type': 'application/json',
-                    "Access-Control-Allow-Origin": "*" 
+                'Content-Type': 'application/json',
+                "Access-Control-Allow-Origin": "*" 
             },
             'body': json.dumps({
                 "Success": False,
@@ -141,8 +141,8 @@ def handler(event, context):
             return {
                 'statusCode': 201,
                 'headers': {
-                        'Content-Type': 'application/json',
-                        "Access-Control-Allow-Origin": "*" 
+                    'Content-Type': 'application/json',
+                    "Access-Control-Allow-Origin": "*" 
                 },
                 'body': json.dumps({
                     "Success": False,
@@ -153,8 +153,8 @@ def handler(event, context):
         return {
             'statusCode': 201,
             'headers': {
-                    'Content-Type': 'application/json',
-                    "Access-Control-Allow-Origin": "*" 
+                'Content-Type': 'application/json',
+                "Access-Control-Allow-Origin": "*" 
             },
             'body': json.dumps({
                 "Success": False,
@@ -169,8 +169,8 @@ def handler(event, context):
         return {
             'statusCode': 201,
             'headers': {
-                    'Content-Type': 'application/json',
-                    "Access-Control-Allow-Origin": "*" 
+                'Content-Type': 'application/json',
+                "Access-Control-Allow-Origin": "*" 
             },
             'body': json.dumps({
                 "Success": False,
@@ -184,8 +184,8 @@ def handler(event, context):
         return {
             'statusCode': 201,
             'headers': {
-                    'Content-Type': 'application/json',
-                    "Access-Control-Allow-Origin": "*" 
+                'Content-Type': 'application/json',
+                "Access-Control-Allow-Origin": "*" 
             },
             'body': json.dumps({
                 "Success": False,
@@ -198,8 +198,8 @@ def handler(event, context):
     return {
         'statusCode': 200,
         'headers': {
-                'Content-Type': 'application/json',
-                "Access-Control-Allow-Origin": "*" 
+            'Content-Type': 'application/json',
+            "Access-Control-Allow-Origin": "*" 
         },
         'body': json.dumps({
             "Success": True,
