@@ -21,9 +21,49 @@ Gå in på [Github](https://github.com/settings/keys) > settings > SSH and GPG k
 
 https://km1wzv5ri1.execute-api.us-east-1.amazonaws.com/v1
 
-GET - hämta alla skolors info
+### GET - hämta alla skolors info
 
-PUT - ladda upp ny data
+Ingen body.
+
+Exempel på response body:
+
+    [
+        {
+            "CurrentAmount": 110,
+            "Ansvarig": "musikkollen_abbindu",
+            "Skola": "ABB",
+            "LastAmount": [
+                100,
+                10,
+                10,
+                -10
+            ],
+            "LastUpdate": [
+                "2019-11-30 12:14:39.790517",
+                "2019-11-30 12:14:53.311116",
+                "2019-11-30 12:50:51.632377",
+                "2019-11-30 12:53:19.241188"
+            ]
+        },
+        {
+            "CurrentAmount": -1119,
+            "Ansvarig": "musikkollen_rudbeck",
+            "Skola": "ABB",
+            "LastAmount": [
+                -100,
+                -10,
+                -10,
+                -999
+            ],
+            "LastUpdate": [
+                "2019-11-30 12:14:39.790517",
+                "2019-11-30 12:14:53.311116",
+                "2019-11-30 12:50:51.632377"
+            ]
+        }
+    ]
+
+### PUT - ladda upp ny data
 
 Exempel body:
 
