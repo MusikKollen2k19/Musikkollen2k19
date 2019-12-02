@@ -5,10 +5,10 @@ import datetime
 dynamodb = boto3.resource('dynamodb', region_name='us-east-1')
 
 
-def checkbody(body):
+def checkbody(body): # Kollar så att det finns pass, user, amount och att det är ett nummer
 
     if "pass" not in body:
-        return [False, "pass"]
+        return [False, "pass"] # [status, anledning]
 
     if "user" not in body:
         return [False, "user"]
@@ -22,10 +22,10 @@ def checkbody(body):
     return [True]
 
 
-def checkpass(body):
+def checkpass(body): # Kolla så att lösenordet stämmer
     table = dynamodb.Table('Users')
 
-    User = body["user"].lower()
+    User = body["user"].lower() # Alla användarnamn har små bokstäver
 
     result = table.get_item(
         Key={
@@ -34,7 +34,7 @@ def checkpass(body):
         }
     )
 
-    if "Item" not in result:  # avslutar om användaren inte finns
+    if "Item" not in result:  # avslutar om användaren inte finns eftersom Item ite finns
         return [False, "No user"]
 
     if result["Item"]["password"] == body["pass"]:  # om det stämmer överäns
@@ -49,23 +49,23 @@ def CrossReferenceShcool(body):
 
     User = body["user"].lower()
 
-    result = table.scan()
+    result = table.scan() # Scannar hela table
 
-    for x in result["Items"]:
+    for x in result["Items"]: # kollar alla Items
         # print(x)
-        if User in x["Ansvarig"]:
+        if User in x["Ansvarig"]: # om user är ansvarig skickar den tillbaka den skolan
             return [True, x["Skola"]]
 
-    return [False, "No user"]
+    return [False, "No user"] # om den inte har hittat säger den det
 
 
-def addto(body, Skola):
+def addto(body, Skola): # Update expressions var jobbiga så vi hämtar allt, uppdaterar det och skickar tillbaka
 
     table = dynamodb.Table('Musikkollen')
 
     result = table.get_item(
         Key={
-            'Skola': Skola,
+            'Skola': Skola, # Skola är huvudnyckeln så man måste söka efter det
         }
     )
 
@@ -74,12 +74,12 @@ def addto(body, Skola):
     # result["Item"]["LastAmount"][0] = int(result["Item"]["LastAmount"][0])
     result["Item"]["CurrentAmount"] = int(result["Item"]["CurrentAmount"])
 
-    result["Item"]["LastAmount"].append(int(body["Amount"]))
+    result["Item"]["LastAmount"].append(int(body["Amount"])) # Lägger till allt nytt
     result["Item"]["LastUpdate"].append(str(datetime.datetime.now()))
 
     # print(result["Item"])
 
-    response = table.put_item(
+    table.put_item( # Skickar tillbaka
         Item={
             'Skola': Skola,
             'Ansvarig': result["Item"]["Ansvarig"],
@@ -90,7 +90,7 @@ def addto(body, Skola):
         }
     )
 
-    print(response)
+    # print(response)
 
     # response = table.update_item(
     #     Key={
@@ -113,8 +113,25 @@ def addto(body, Skola):
 
 
 def handler(event, context):
-    # TODO implement
-    body = (event["body"])
+    
+    # print("\n", event, "\n"*2, type(event), "\n"*2)
+    try:
+        body = json.loads(event["body"])
+    except Exception: # om body inte finns
+        return {
+            'statusCode': 201,
+            'headers': {
+                    'Content-Type': 'application/json',
+                    "Access-Control-Allow-Origin": "*" 
+            },
+            'body': json.dumps({
+                "Success": False,
+                "Meddelande": "No body!"
+            })
+        }
+        
+    
+    
 
     # print(type(checkbody(body)))
 
@@ -123,18 +140,26 @@ def handler(event, context):
         if checkbody(body)[1] == "int":
             return {
                 'statusCode': 201,
-                'body': {
+                'headers': {
+                        'Content-Type': 'application/json',
+                        "Access-Control-Allow-Origin": "*" 
+                },
+                'body': json.dumps({
                     "Success": False,
                     "Meddelande": "'Amount' isn't a int!"
-                }
+                })
             }
 
         return {
             'statusCode': 201,
-            'body': {
+            'headers': {
+                    'Content-Type': 'application/json',
+                    "Access-Control-Allow-Origin": "*" 
+            },
+            'body': json.dumps({
                 "Success": False,
                 "Meddelande": "No '" + checkbody(body)[1] + "' in body!"
-            }
+            })
         }
 
     check = checkpass(body)
@@ -143,10 +168,14 @@ def handler(event, context):
     if check[0] == False:  # Hittade inte användaren
         return {
             'statusCode': 201,
-            'body': {
+            'headers': {
+                    'Content-Type': 'application/json',
+                    "Access-Control-Allow-Origin": "*" 
+            },
+            'body': json.dumps({
                 "Success": False,
                 "Meddelande": "HIttade inte användaren!"
-            }
+            })
         }
 
     cross = CrossReferenceShcool(body)
@@ -154,18 +183,26 @@ def handler(event, context):
     if cross[0] == False:  # Hittade inte den ansvarige
         return {
             'statusCode': 201,
-            'body': {
+            'headers': {
+                    'Content-Type': 'application/json',
+                    "Access-Control-Allow-Origin": "*" 
+            },
+            'body': json.dumps({
                 "Success": False,
                 "Meddelande": "HIttade inte den ansvarige!"
-            }
+            })
         }
 
-    addto(body, cross[1])
+    addto(body, cross[1]) # body och skola
 
     return {
         'statusCode': 200,
-        'body': {
+        'headers': {
+                'Content-Type': 'application/json',
+                "Access-Control-Allow-Origin": "*" 
+        },
+        'body': json.dumps({
             "Success": True,
             "Meddelande": "Uppdaterade Värdet!"
-        }
+        })
     }
