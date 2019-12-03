@@ -1,7 +1,5 @@
 <template>
   <v-app id="background" fixed>
-    <v-container bg fill-height grid-list-md text-xs-center>
-      <v-row>
         <v-flex xs4 offset-4>
           <v-card max-width="450" elevation="20" justify-center align-center class-mx-auto id="a6">
             <h1 id="a3">Lägg till summa</h1>
@@ -44,7 +42,8 @@
               </v-form>
               <v-card-actions>
                 <v-btn
-                  :disabled="!valid"
+                  :disabled="!valid || dis"
+                  :loading="dis"
                   id="a5"
                   xs12
                   color="primary"
@@ -58,8 +57,6 @@
             </v-card-text>
           </v-card>
         </v-flex>
-      </v-row>
-    </v-container>
     <v-snackbar
       v-model="snackbar"
       :vertical="vertical"
@@ -89,6 +86,7 @@ export default {
   },
   data: () => ({
     drawer: 0,
+    dis: false,
     sek: "",
     login: "",
     valid: true,
@@ -111,6 +109,7 @@ export default {
   }),
   methods: {
     async submit() {
+      this.dis = true;
       var log = this.login;
       let body = {
         user: this.login,
@@ -124,8 +123,6 @@ export default {
         stringbody
       );
       // eslint-disable-next-line
-      console.log(response);
-      console.log(response.data.Success);
       this.Alert = true;
       this.Alert_text = response.data.Meddelande
       this.snackbar = true;
@@ -137,6 +134,7 @@ export default {
         this.Alert_type = "error";
         this.snackbar_type = "error";
       }
+      this.dis = false;
       // this.snackbar = true;
       // router.push("/");
     }

@@ -1,21 +1,98 @@
-
 <template>
-  <div class="home">
-    <h1>
-      OK bommmer
-    </h1>
-  </div>
+    <v-container>
+        <v-btn @click="fetch" class="pink">Uppdatera</v-btn>
+  <v-data-table 
+    :headers="headers"
+    :items="desserts"
+    class="elevation-1"
+  ></v-data-table>
+   </v-container>
 </template>
-
-<style scoped>
-.titel {
-  font-family: verdana;
-  font-size: 60px;
-  color: red;
-}
-.subtext {
-  font-family: verdana;
-  font-size: 20px;
-  color: red;
-}
+ 
+<script>
+const axios = require("axios");
+  export default {
+    created(){
+  this.fetch();
+},
+    name: "Chart",
+    data () {
+      return {
+        Messagedata: "dddffffjjjjjdd",
+        Ansvar: "ty",
+        Siffra: 69,
+        headers: [
+          {
+            text: "Skola",
+            align: 'left',
+            sortable: false,
+            value: 'name',
+          },
+          { text: 'Pengar insamlat (kr)', value: 'cash' },
+          { text: 'Ansvarig lärare', value: 'ansv' },
+        ],
+        desserts: [
+          {
+            name: 'Grillska',
+            cash: 50,
+            ansv: "Bruh Momento",
+          },
+          {
+            name: 'Rudbeck',
+            cash: 1,
+            ansv: "Big Ounce, professional gangstar",
+          },
+          {
+            name: "Wijkmanska",
+            cash: 50.5,
+            ansv: "JoJo",
+          },
+          {
+            name: "es",
+            cash: 500000,
+            ansv: "ertg",
+          },
+        ],
+      }
+    },
+    methods: {
+        fetch(){
+          let self = this;
+          
+     //Ändra denna URL så funkar för din API eller enhet
+     axios.get("https://km1wzv5ri1.execute-api.us-east-1.amazonaws.com/v1")
+  .then(function (response) {
+    
+       /* eslint-disable */
+    // console.log(response);
+    self.desserts[3].name=response.data[0].Skola;
+    self.desserts[3].cash=response.data[0].CurrentAmount;
+    self.desserts[3].ansv=response.data[0].Ansvarig;
+        self.desserts[2].name=response.data[0].Skola;
+    self.desserts[2].cash=response.data[0].CurrentAmount;
+    self.desserts[2].ansv=response.data[0].Ansvarig;
+        self.desserts[1].name=response.data[0].Skola;
+    self.desserts[1].cash=response.data[0].CurrentAmount;
+    self.desserts[1].ansv=response.data[0].Ansvarig;
+        self.desserts[0].name=response.data[0].Skola;
+    self.desserts[0].cash=response.data[0].CurrentAmount;
+    self.desserts[0].ansv=response.data[0].Ansvarig;
+    })
+    .catch(function (error) {
+    
+       /* eslint-disable */
+       console.log(error);
+  });
+    }
+    },
+    links: [{
+      route: "/login",
+    }],
+  }
+</script>
+<style>
+  #Cooltext {
+    color: black;
+    text-decoration: underline;
+  }
 </style>

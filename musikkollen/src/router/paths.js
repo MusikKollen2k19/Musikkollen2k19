@@ -1,6 +1,6 @@
 export default [{
     path: '/',
-    name: 'Home',
+    name: 'Hem',
     view: 'Home',
     //   component: Home
   },
