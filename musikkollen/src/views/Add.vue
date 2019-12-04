@@ -1,74 +1,68 @@
 <template>
   <v-app id="background" fixed>
-        <v-flex xs4 offset-4>
-          <v-card max-width="450" elevation="20" justify-center align-center class-mx-auto id="a6">
-            <h1 id="a3" >Lägg till summa</h1>
-            <div class="flex-grow-1"></div>
-            <v-tooltip bottom>
-              <template v-slot:activator="{ on }"></template>
-            </v-tooltip>
-            <v-tooltip right>
-              <template v-slot:activator="{ on }"></template>
-            </v-tooltip>
+    <v-flex justify-center align-center>
+      <v-card max-width="450" elevation="20" justify-center align-center class-mx-auto id="a6">
+        <h1 id="a3">Lägg till summa</h1>
+        <div class="flex-grow-1"></div>
+        <v-tooltip bottom>
+          <template v-slot:activator="{ on }"></template>
+        </v-tooltip>
+        <v-tooltip right>
+          <template v-slot:activator="{ on }"></template>
+        </v-tooltip>
 
-            <v-card-text>
-              <v-form v-model="valid">
-                <v-text-field
-                  label="Användarnamn"
-                  name="Användarnamn"
-                  type="text"
-                  v-model="login"
-                  :rules="loginRules"
-                  required
-                ></v-text-field>
+        <v-card-text>
+          <v-form v-model="valid">
+            <v-text-field
+              label="Användarnamn"
+              name="Användarnamn"
+              type="text"
+              v-model="login"
+              :rules="loginRules"
+              required
+            ></v-text-field>
 
-                <v-text-field
-                  label="Lösenord"
-                  name="Lösenord"
-                  type="password"
-                  v-model="password"
-                  :rules="passwordRules"
-                  required
-                ></v-text-field>
+            <v-text-field
+              label="Lösenord"
+              name="Lösenord"
+              type="password"
+              v-model="password"
+              :rules="passwordRules"
+              required
+            ></v-text-field>
 
-                <v-text-field
-                  label="Antal kronor"
-                  name="SEK"
-                  type="number"
-                  v-model="sek"
-                  :rules="sekRules"
-                  required
-                ></v-text-field>
-              </v-form>
-              <v-card-actions>
-                <!-- <span>Du kan lägga till ett minustecken för att ta bort en summa</span> -->
-                <v-btn
-                  :disabled="!valid || dis"
-                  :loading="dis"
-                  id="a5"
-                  xs12
-                  color="primary"
-                  block
-                  tile
-                  @click="submit"
-                >Lägg till</v-btn>
-              </v-card-actions>
-              <br />
-              <v-alert :type="Alert_type" v-if="Alert">{{ Alert_text }}</v-alert>
-            </v-card-text>
-          </v-card>
-        </v-flex>
-    <v-snackbar
-      v-model="snackbar"
-    >
+            <v-text-field
+              label="Antal kronor"
+              name="SEK"
+              type="number"
+              v-model="sek"
+              :rules="sekRules"
+              required
+            ></v-text-field>
+          </v-form>
+            <span>Du kan lägga till ett minustecken för att ta bort en summa</span>
+          <v-card-actions>
+            <v-row>
+              <v-btn
+                :disabled="!valid || dis"
+                :loading="dis"
+                id="a5"
+                
+                color="primary"
+                block
+                tile
+                @click="submit"
+              >Lägg till</v-btn>
+            </v-row>
+          </v-card-actions>
+          <br />
+          <v-alert :type="Alert_type" v-if="Alert">{{ Alert_text }}</v-alert>
+        </v-card-text>
+      </v-card>
+    </v-flex>
+    <v-snackbar v-model="snackbar">
       {{ snackbar_text }}
-      <v-btn
-        :color="snackbar_type"
-        text
-        @click="snackbar = false"
-      >
-        Close
-      </v-btn>
+      <v-btn :color="snackbar_type" text @click="snackbar = false">Close</v-btn>
     </v-snackbar>
   </v-app>
 </template>
@@ -124,9 +118,9 @@ export default {
       );
       // eslint-disable-next-line
       this.Alert = true;
-      this.Alert_text = response.data.Meddelande
+      this.Alert_text = response.data.Meddelande;
       this.snackbar = true;
-      this.snackbar_text = response.data.Meddelande
+      this.snackbar_text = response.data.Meddelande;
       if (response.data.Success == true) {
         this.Alert_type = "success";
         this.snackbar_type = "success";

@@ -33,7 +33,8 @@ export default {
         {
           name: "Laddar",
           cash: "Laddar mer",
-          ansv: "Laddar ännu mer"
+          ansv: "Laddar ännu mer",
+          tid: "kolla din uppkoppling" 
         }
       ]
     };
