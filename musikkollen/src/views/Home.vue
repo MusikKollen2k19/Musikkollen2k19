@@ -1,7 +1,11 @@
 <template>
   <v-container>
-    <v-btn @click="fetch" class="pink">Uppdatera</v-btn>
-    <v-data-table :headers="headers" :items="info" class="elevation-1"></v-data-table>
+    <v-btn @click="fetch" class="pink" :disabled="Loading" :loading="Loading">Uppdatera</v-btn>
+    <v-data-table :loaing="Loading" :headers="headers" :items="info" class="elevation-1"></v-data-table>
+    <v-snackbar v-model="snackbar">
+      {{ snackbar_text }}
+      <v-btn :color="snackbar_type" text @click="snackbar = false">Close</v-btn>
+    </v-snackbar>
   </v-container>
 </template>
  
@@ -12,11 +16,16 @@ export default {
     this.fetch();
   },
   name: "Chart",
+
   data() {
     return {
       Messagedata: "dddffffjjjjjdd",
       Ansvar: "ty",
       Siffra: 69,
+      Loading: false,
+      snackbar: false,
+      snackbar_text: "",
+      snackbar_type: "success",
       headers: [
         {
           text: "Skola",
@@ -24,17 +33,17 @@ export default {
           sortable: false,
           value: "name"
         },
-        { text: "Pengar insamlat (kr)", value: "cash" },
-        { text: "Ansvarig lärare", value: "ansv" },
-        { text: "Senaste Bidrag", value: "bid" },
-        { text: "Senaste Uppdatering", value: "tid" }
+        { text: "Pengar insamlat (kr)", value: "cash" }
+        // { text: "Ansvarig lärare", value: "ansv" },
+        // { text: "Senaste Bidrag", value: "bid" },
+        // { text: "Senaste Uppdatering", value: "tid" }
       ],
       info: [
         {
           name: "Laddar",
           cash: "Laddar mer",
           ansv: "Laddar ännu mer",
-          tid: "kolla din uppkoppling" 
+          tid: "kolla din uppkoppling"
         }
       ]
     };
@@ -42,42 +51,98 @@ export default {
   methods: {
     fetch() {
       let self = this;
+      let out = "";
+
+      self.info = []
+
+      self.Loading = true
 
       //Ändra denna URL så funkar för din API eller enhet
       axios
-        .get("https://km1wzv5ri1.execute-api.us-east-1.amazonaws.com/v1")
+        .get(
+          "https://bossan.musikhjalpen.se/insamlingar/abbe-abb-industrigymnasium"
+        )
         .then(function(response) {
-          // console.log(response.data);
-          self.info = [];
+          let re = /<h1 class="font-thick">.+kr/i;
+          out = response.data.match(re)[0];
+          let Tal = out.replace('<h1 class="font-thick">', "");
+          out = Tal.replace(" ", "");
 
-          response.data.forEach(element => {
-            // console.log(element);
-            var d = new Date(element.LastUpdate.slice(-1).pop()).toLocaleString("sv", { timeZone: 'Europe/Helsinki' });
-            
-            // console.log(d)
-            
-            self.info.push({
-              name: element.Skola,
-              cash: element.CurrentAmount,
-              ansv: element.Ansvarig,
-              bid: element.LastAmount.slice(-1).pop(),
-              tid: d,
-            });
+          self.info.push({
+            name: "ABB",
+            cash: Tal
           });
 
+          // self.snackbar_text = parseInt(out);
+          // self.snackbar = true;
+        })
+        .catch(function(error) {
           /* eslint-disable */
-          // self.desserts[3].name = response.data[0].Skola;
-          // self.desserts[3].cash = response.data[0].CurrentAmount;
-          // self.desserts[3].ansv = response.data[0].Ansvarig;
-          // self.desserts[2].name = response.data[0].Skola;
-          // self.desserts[2].cash = response.data[0].CurrentAmount;
-          // self.desserts[2].ansv = response.data[0].Ansvarig;
-          // self.desserts[1].name = response.data[0].Skola;
-          // self.desserts[1].cash = response.data[0].CurrentAmount;
-          // self.desserts[1].ansv = response.data[0].Ansvarig;
-          // self.desserts[0].name = response.data[0].Skola;
-          // self.desserts[0].cash = response.data[0].CurrentAmount;
-          // self.desserts[0].ansv = response.data[0].Ansvarig;
+          console.log(error);
+        });
+
+      axios
+        .get(
+          "https://bossan.musikhjalpen.se/insamlingar/rudbeckianska-gymnasiet-orginalet-sedan-1623"
+        )
+        .then(function(response) {
+          let re = /<h1 class="font-thick">.+kr/i;
+          out = response.data.match(re)[0];
+          let Tal = out.replace('<h1 class="font-thick">', "");
+          out = Tal.replace(" ", "");
+
+          self.info.push({
+            name: "Rudbeck",
+            cash: Tal
+          });
+
+          // self.snackbar_text = parseInt(out);
+          // self.snackbar = true;
+        })
+        .catch(function(error) {
+          /* eslint-disable */
+          console.log(error);
+        });
+      axios
+        .get(
+          "https://bossan.musikhjalpen.se/insamlingar/grillska-gymnasiet-vasteras-for-musikhjalpen-2019"
+        )
+        .then(function(response) {
+          let re = /<h1 class="font-thick">.+kr/i;
+          out = response.data.match(re)[0];
+          let Tal = out.replace('<h1 class="font-thick">', "");
+          out = Tal.replace(" ", "");
+
+          self.info.push({
+            name: "Grillska",
+            cash: Tal
+          });
+
+          // self.snackbar_text = parseInt(out);
+          // self.snackbar = true;
+        })
+        .catch(function(error) {
+          /* eslint-disable */
+          console.log(error);
+        });
+      axios
+        .get(
+          "https://bossan.musikhjalpen.se/insamlingar/abbe-abb-industrigymnasium"
+        )
+        .then(function(response) {
+          let re = /<h1 class="font-thick">.+kr/i;
+          out = response.data.match(re)[0];
+          let Tal = out.replace('<h1 class="font-thick">', "");
+          out = Tal.replace(" ", "");
+
+          self.info.push({
+            name: "Wjikmanska",
+            cash: "har ingen än?"
+          });
+          self.Loading = false
+
+          // self.snackbar_text = parseInt(out);
+          // self.snackbar = true;
         })
         .catch(function(error) {
           /* eslint-disable */
