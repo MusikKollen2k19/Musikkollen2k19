@@ -25,7 +25,9 @@ export default {
           value: "name"
         },
         { text: "Pengar insamlat (kr)", value: "cash" },
-        { text: "Ansvarig lärare", value: "ansv" }
+        { text: "Ansvarig lärare", value: "ansv" },
+        { text: "Senaste Bidrag", value: "bid" },
+        { text: "Senaste Uppdatering", value: "tid" }
       ],
       info: [
         {
@@ -49,7 +51,13 @@ export default {
 
           response.data.forEach(element => {
             // console.log(element);
-            self.info.push({name: element.Skola, cash: element.CurrentAmount, ansv: element.Ansvarig})
+            self.info.push({
+              name: element.Skola,
+              cash: element.CurrentAmount,
+              ansv: element.Ansvarig,
+              bid: element.LastAmount.slice(-1).pop(),
+              tid: element.LastUpdate.slice(-1).pop(),
+            });
           });
 
           /* eslint-disable */
