@@ -41,6 +41,7 @@
                 ></v-text-field>
               </v-form>
               <v-card-actions>
+                <!-- <span>Du kan lägga till ett minustecken för att ta bort en summa</span> -->
                 <v-btn
                   :disabled="!valid || dis"
                   :loading="dis"

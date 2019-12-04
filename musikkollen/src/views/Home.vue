@@ -51,12 +51,16 @@ export default {
 
           response.data.forEach(element => {
             // console.log(element);
+            var d = new Date(element.LastUpdate.slice(-1).pop()).toLocaleString("sv", { timeZone: 'Europe/Helsinki' });
+            
+            // console.log(d)
+            
             self.info.push({
               name: element.Skola,
               cash: element.CurrentAmount,
               ansv: element.Ansvarig,
               bid: element.LastAmount.slice(-1).pop(),
-              tid: element.LastUpdate.slice(-1).pop(),
+              tid: d,
             });
           });
 
