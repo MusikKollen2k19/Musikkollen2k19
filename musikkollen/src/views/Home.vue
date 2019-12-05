@@ -55,8 +55,8 @@ export default {
           sortable: false,
           value: "name"
         },
-        { text: "Pengar insamlat (kr)", value: "cash" }
-        // { text: "Ansvarig lärare", value: "ansv" },
+        { text: "Pengar insamlat (kr)", value: "cash" },
+        { text: "Antal donationer", value: "antal" },
         // { text: "Senaste Bidrag", value: "bid" },
         // { text: "Senaste Uppdatering", value: "tid" }
       ],
@@ -89,11 +89,16 @@ export default {
             let re = /<h1 class="font-thick">.+kr/i;
             out = response.data.match(re)[0];
             let Tal = out.replace('<h1 class="font-thick">', "");
-            out = Tal.replace(" ", "");
+
+            let re2 = /<p>insamlat av .+ givare<\/p>/
+            let out2 = response.data.match(re2)[0];
+            let Tal2 = out2.replace('<p>', "");
+            Tal2 = Tal2.replace('</p>', '')
 
             self.info.push({
               name: element.name,
-              cash: Tal
+              cash: Tal,
+              antal: Tal2
             });
             self.Loading = false;
           });
