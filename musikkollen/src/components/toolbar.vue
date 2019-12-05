@@ -1,6 +1,6 @@
 <template>
   <div>
-    <v-app-bar color="blue">
+    <v-app-bar color="orange">
       <v-img
         class="shrink mt-1 hidden-sm-and-down"
         contain
@@ -14,7 +14,7 @@
       <v-toolbar-items>
         <v-btn v-for="(link, i) in links" :key="i" :to="link.path" color="primary">{{link.name}}</v-btn>
 
-      <v-btn class="blue" href="https://sverigesradio.se/musikhjalpen" target="_blank" text>
+      <v-btn class="blue" href="https://sverigesradio.se/musikhjalpen" target="_blank" text color="white">
         <span class="mr-2">MUSIKHÄLPEN</span>
         <v-icon>mdi-open-in-new</v-icon>
       </v-btn>
@@ -35,3 +35,8 @@ export default {
   }
 };
 </script>
+<style scoped>
+#a5 {
+  color: rgb(194, 151, 10);
+}
+</style>
