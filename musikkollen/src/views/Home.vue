@@ -1,7 +1,21 @@
 <template>
   <v-container>
-    <v-btn @click="fetch" id="a5" class="font-weight-bold" color="blue" :disabled="Loading" :loading="Loading">Uppdatera</v-btn>
-    <v-data-table :loaing="Loading" :headers="headers" :items="info" class="elevation-1"></v-data-table>
+    <v-btn
+      @click="fetch"
+      id="a5"
+      class="font-weight-bold"
+      color="blue"
+      :disabled="Loading"
+      :loading="Loading"
+    >Uppdatera</v-btn>
+    <v-data-table
+      sort-by="cash"
+      :sort-desc="true"
+      :loaing="Loading"
+      :headers="headers"
+      :items="info"
+      class="elevation-1"
+    ></v-data-table>
     <v-snackbar v-model="snackbar">
       {{ snackbar_text }}
       <v-btn :color="snackbar_type" text @click="snackbar = false">Close</v-btn>
@@ -71,7 +85,7 @@ export default {
       let out = "";
 
       self.info = [{
-        name: "Wijkmaska",
+        name: "Wijkmanska",
         cash: "0"
       }];
 
