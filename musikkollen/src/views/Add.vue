@@ -2,7 +2,7 @@
   <v-app id="background" fixed>
     <v-flex justify-center align-center>
       <v-card max-width="450" elevation="20" justify-center align-center class-mx-auto id="a6">
-        <h1 id="a3">Lägg till summa</h1>
+        <h1 id="a3">Lägg till summa DEPRICATED</h1>
         <div class="flex-grow-1"></div>
         <v-tooltip bottom>
           <template v-slot:activator="{ on }"></template>

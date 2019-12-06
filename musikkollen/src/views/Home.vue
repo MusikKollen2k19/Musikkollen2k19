@@ -41,11 +41,6 @@ export default {
           url:
             "https://bossan.musikhjalpen.se/insamlingar/grillska-gymnasiet-vasteras-for-musikhjalpen-2019",
           name: "Grillska"
-        },
-        {
-          url:
-            "https://bossan.musikhjalpen.se/insamlingar/abbe-abb-industrigymnasium",
-          name: "WiJkmanska"
         }
       ],
       headers: [
@@ -75,7 +70,10 @@ export default {
       let self = this;
       let out = "";
 
-      self.info = [];
+      self.info = [{
+        name: "Wijkmaska",
+        cash: "0"
+      }];
 
       self.Loading = true;
 
@@ -97,7 +95,6 @@ export default {
             });
             self.Loading = false;
           });
-<<<<<<< HEAD
 
           // self.snackbar_text = parseInt(out);
           // self.snackbar = true;
@@ -129,9 +126,6 @@ export default {
           /* eslint-disable */
           console.log(error);
         });
-=======
-      });
->>>>>>> f6f289e5e9933e68da6d171bf99439ed8526bf03
     }
   },
   links: [
