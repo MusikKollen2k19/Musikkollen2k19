@@ -5,6 +5,7 @@ set -e
 
 # build
 cd musikkollen/
+echo "##############################"
 echo
 echo "installing..."
 echo
@@ -36,5 +37,9 @@ echo "##############################"
 # if you are deploying to https://<USERNAME>.github.io
 git push -f git@github.com:musikkollen2k19/musikkollen2k19.github.io.git master
 
-
+echo "##############################"
+echo
+echo "Done!"
+echo
+echo "##############################"
 cd -
