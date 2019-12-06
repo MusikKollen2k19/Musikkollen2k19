@@ -1,6 +1,6 @@
 <template>
   <v-container>
-    <v-btn @click="fetch" class="pink" :disabled="Loading" :loading="Loading">Uppdatera</v-btn>
+    <v-btn @click="fetch" id="a5" class="font-weight-bold" color="blue" :disabled="Loading" :loading="Loading">Uppdatera</v-btn>
     <v-data-table :loaing="Loading" :headers="headers" :items="info" class="elevation-1"></v-data-table>
     <v-snackbar v-model="snackbar">
       {{ snackbar_text }}
@@ -41,11 +41,6 @@ export default {
           url:
             "https://bossan.musikhjalpen.se/insamlingar/grillska-gymnasiet-vasteras-for-musikhjalpen-2019",
           name: "Grillska"
-        },
-        {
-          url:
-            "https://bossan.musikhjalpen.se/insamlingar/abbe-abb-industrigymnasium",
-          name: "Wikmanska"
         }
       ],
       headers: [
@@ -75,7 +70,10 @@ export default {
       let self = this;
       let out = "";
 
-      self.info = [];
+      self.info = [{
+        name: "Wijkmaska",
+        cash: "0"
+      }];
 
       self.Loading = true;
 
@@ -102,7 +100,37 @@ export default {
             });
             self.Loading = false;
           });
-      });
+
+          // self.snackbar_text = parseInt(out);
+          // self.snackbar = true;
+        })
+        .catch(function(error) {
+          /* eslint-disable */
+          console.log(error);
+        });
+      axios
+        .get(
+          "https://bossan.musikhjalpen.se/insamlingar/abbe-abb-industrigymnasium"
+        )
+        .then(function(response) {
+          let re = /<h1 class="font-thick">.+kr/i;
+          out = response.data.match(re)[0];
+          let Tal = out.replace('<h1 class="font-thick">', "");
+          out = Tal.replace(" ", "");
+
+          self.info.push({
+            name: "Wijkmanska",
+            cash: "har ingen än?"
+          });
+          self.Loading = false
+
+          // self.snackbar_text = parseInt(out);
+          // self.snackbar = true;
+        })
+        .catch(function(error) {
+          /* eslint-disable */
+          console.log(error);
+        });
     }
   },
   links: [
@@ -115,6 +143,8 @@ export default {
 <style>
 #Cooltext {
   color: black;
-  text-decoration: underline;
+}
+#a5 {
+  color: rgb(210, 235, 52);
 }
 </style>
