@@ -2,7 +2,7 @@
   <v-app>
     <toolbar />
 
-    <v-content >
+    <v-content class="grey darken-4">
       <v-fade-transition mode="out-in">
         <router-view class="px-8 py-8" />
       </v-fade-transition>

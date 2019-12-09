@@ -4,7 +4,7 @@
       @click="fetch"
       id="a5"
       class="font-weight-bold"
-      color="blue"
+      color="orange"
       :disabled="Loading"
       :loading="Loading"
     >Uppdatera</v-btn>
@@ -15,6 +15,7 @@
       :headers="headers"
       :items="info"
       class="elevation-1"
+      dark
     ></v-data-table>
     <v-snackbar v-model="snackbar">
       {{ snackbar_text }}

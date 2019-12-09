@@ -12,10 +12,10 @@
       <v-spacer></v-spacer>
 
       <v-toolbar-items>
-        <v-btn v-for="(link, i) in links" :key="i" :to="link.path" color="primary">{{link.name}}</v-btn>
+        <!-- <v-btn v-for="(link, i) in links" :key="i" :to="link.path" color="primary">{{link.name}}</v-btn> -->
 
-      <v-btn class="blue" href="https://sverigesradio.se/musikhjalpen" target="_blank" text color="white">
-        <span class="mr-2">MUSIKHÄLPEN</span>
+      <v-btn class="orange" href="https://sverigesradio.se/musikhjalpen" target="_blank" text color="white">
+        <span class="mr-2">MUSIKHJÄLPEN</span>
         <v-icon>mdi-open-in-new</v-icon>
       </v-btn>
       </v-toolbar-items>
