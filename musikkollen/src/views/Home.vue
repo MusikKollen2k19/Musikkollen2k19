@@ -69,7 +69,6 @@ export default {
         },
         { text: "Pengar insamlat (kr)", value: "cash" },
         { text: "Antal donationer", value: "antal" },
-        // { text: "Senaste Bidrag", value: "bid" },
         { text: "Sida", value: "sida" },
         // { text: "Senaste Uppdatering", value: "tid" }
       ],
