@@ -29,8 +29,9 @@ const axios = require("axios");
 export default {
   created() {
     this.fetch();
-    setInterval(function(){ this.fetch(); }, 10000);
-    
+    setInterval(function() {
+      this.fetch();
+    }, 10000);
   },
   name: "Chart",
 
@@ -69,7 +70,7 @@ export default {
         },
         { text: "Pengar insamlat (kr)", value: "cash" },
         { text: "Antal donationer", value: "antal" },
-        { text: "Sida", value: "sida" },
+        { text: "Sida", value: "sida" }
         // { text: "Senaste Uppdatering", value: "tid" }
       ],
       info: [
@@ -87,28 +88,27 @@ export default {
       let self = this;
       let out = "";
 
-      self.info = [{
-        name: "Wijkmanska",
-        cash: "0"
-      }];
+      self.info = [
+        {
+          name: "Wijkmanska",
+          cash: "0"
+        }
+      ];
 
       self.Loading = true;
 
       //Ändra denna URL så funkar för din API eller enhet
-      this.skolor.forEach(element => {
-        axios
-          .get(
-            element.url
-          )
-          .then(function(response) {
+      this.skolor
+        .forEach(element => {
+          axios.get(element.url).then(function(response) {
             let re = /<h1 class="font-thick">.+kr/i;
             out = response.data.match(re)[0];
             let Tal = out.replace('<h1 class="font-thick">', "");
 
-            let re2 = /<p>insamlat av .+ givare<\/p>/
+            let re2 = /<p>insamlat av .+ givare<\/p>/;
             let out2 = response.data.match(re2)[0];
-            let Tal2 = out2.replace('<p>', "");
-            Tal2 = Tal2.replace('</p>', '')
+            let Tal2 = out2.replace("<p>", "");
+            Tal2 = Tal2.replace("</p>", "");
 
             self.info.push({
               name: element.name,
@@ -126,7 +126,6 @@ export default {
           /* eslint-disable */
           console.log(error);
         });
-
     }
   },
   links: [
