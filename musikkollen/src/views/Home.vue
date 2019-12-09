@@ -7,6 +7,7 @@
       color="orange"
       :disabled="Loading"
       :loading="Loading"
+      light
     >Uppdatera</v-btn>
     <v-data-table
       sort-by="cash"
@@ -29,9 +30,9 @@ const axios = require("axios");
 export default {
   created() {
     this.fetch();
-    setInterval(function() {
-      this.fetch();
-    }, 10000);
+    // setInterval(function() {
+    //   this.fetch();
+    // }, 10000);
   },
   name: "Chart",
 
@@ -70,7 +71,7 @@ export default {
         },
         { text: "Pengar insamlat (kr)", value: "cash" },
         { text: "Antal donationer", value: "antal" },
-        { text: "Sida", value: "sida" }
+        // { text: "Sida", value: "sida" }
         // { text: "Senaste Uppdatering", value: "tid" }
       ],
       info: [
@@ -103,7 +104,7 @@ export default {
           axios.get(element.url).then(function(response) {
             let re = /<h1 class="font-thick">.+kr/i;
             out = response.data.match(re)[0];
-            let Tal = out.replace('<h1 class="font-thick">', "");
+            let Tal = out.replace('<h1 class="font-thick">', "").replace(" ", "").replace("kr", "");
 
             let re2 = /<p>insamlat av .+ givare<\/p>/;
             let out2 = response.data.match(re2)[0];
@@ -114,7 +115,7 @@ export default {
               name: element.name,
               cash: Tal,
               antal: Tal2,
-              sida: '<a href="' + element.url + '"> hÄr </a>'
+              // sida: '<a href="' + element.url + '"> hÄr </a>'
             });
             self.Loading = false;
           });
