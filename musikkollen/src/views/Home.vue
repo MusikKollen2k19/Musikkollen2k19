@@ -29,6 +29,8 @@ const axios = require("axios");
 export default {
   created() {
     this.fetch();
+    setInterval(function(){ this.fetch(); }, 10000);
+    
   },
   name: "Chart",
 
@@ -68,6 +70,7 @@ export default {
         { text: "Pengar insamlat (kr)", value: "cash" },
         { text: "Antal donationer", value: "antal" },
         // { text: "Senaste Bidrag", value: "bid" },
+        { text: "Sida", value: "sida" },
         // { text: "Senaste Uppdatering", value: "tid" }
       ],
       info: [
@@ -111,7 +114,8 @@ export default {
             self.info.push({
               name: element.name,
               cash: Tal,
-              antal: Tal2
+              antal: Tal2,
+              sida: '<a href="' + element.url + '"> hÄr </a>'
             });
             self.Loading = false;
           });
@@ -123,29 +127,7 @@ export default {
           /* eslint-disable */
           console.log(error);
         });
-      axios
-        .get(
-          "https://bossan.musikhjalpen.se/insamlingar/abbe-abb-industrigymnasium"
-        )
-        .then(function(response) {
-          let re = /<h1 class="font-thick">.+kr/i;
-          out = response.data.match(re)[0];
-          let Tal = out.replace('<h1 class="font-thick">', "");
-          out = Tal.replace(" ", "");
 
-          self.info.push({
-            name: "Wijkmanska",
-            cash: "har ingen än?"
-          });
-          self.Loading = false
-
-          // self.snackbar_text = parseInt(out);
-          // self.snackbar = true;
-        })
-        .catch(function(error) {
-          /* eslint-disable */
-          console.log(error);
-        });
     }
   },
   links: [
