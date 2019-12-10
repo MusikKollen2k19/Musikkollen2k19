@@ -27,6 +27,7 @@
  
 <script>
 const axios = require("axios");
+import skol_lista from "@/assets/skolor.js";
 export default {
   created() {
     this.fetch();
@@ -45,23 +46,7 @@ export default {
       snackbar: false,
       snackbar_text: "",
       snackbar_type: "success",
-      skolor: [
-        {
-          url:
-            "https://bossan.musikhjalpen.se/insamlingar/abbe-abb-industrigymnasium",
-          name: "ABB"
-        },
-        {
-          url:
-            "https://bossan.musikhjalpen.se/insamlingar/rudbeckianska-gymnasiet-orginalet-sedan-1623",
-          name: "Rudbeck"
-        },
-        {
-          url:
-            "https://bossan.musikhjalpen.se/insamlingar/grillska-gymnasiet-vasteras-for-musikhjalpen-2019",
-          name: "Grillska"
-        }
-      ],
+      skolor: skol_lista,
       headers: [
         {
           text: "Skola",
@@ -70,7 +55,7 @@ export default {
           value: "name"
         },
         { text: "Pengar insamlat (kr)", value: "cash" },
-        { text: "Antal donationer", value: "antal" },
+        { text: "Antal donationer", value: "antal" }
         // { text: "Sida", value: "sida" }
         // { text: "Senaste Uppdatering", value: "tid" }
       ],
@@ -98,13 +83,18 @@ export default {
 
       self.Loading = true;
 
+      // console.log(this.skolor);
+
       //Ändra denna URL så funkar för din API eller enhet
       this.skolor
         .forEach(element => {
           axios.get(element.url).then(function(response) {
             let re = /<h1 class="font-thick">.+kr/i;
             out = response.data.match(re)[0];
-            let Tal = out.replace('<h1 class="font-thick">', "").replace(" ", "").replace("kr", "");
+            let Tal = out
+              .replace('<h1 class="font-thick">', "")
+              .replace(" ", "")
+              .replace("kr", "");
 
             let re2 = /<p>insamlat av .+ givare<\/p>/;
             let out2 = response.data.match(re2)[0];
@@ -114,7 +104,7 @@ export default {
             self.info.push({
               name: element.name,
               cash: Tal,
-              antal: Tal2,
+              antal: Tal2
               // sida: '<a href="' + element.url + '"> hÄr </a>'
             });
             self.Loading = false;
