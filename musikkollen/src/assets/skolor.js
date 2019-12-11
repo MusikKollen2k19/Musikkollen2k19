@@ -32,7 +32,7 @@ export default [
   {
     url:
       "https://bossan.musikhjalpen.se/insamlingar/kunskapsgymnasiet-vasteras",
-    name: "Kunskapsgymnasiet"
+    name: "Kunskap"
   },
   {
     url:
