@@ -9,9 +9,7 @@
       :loading="Loading"
       dark
     >Uppdatera</v-btn>
-    <!-- <v-container>
-      <v-switch dark v-model="fetching" label="Auto update"/>
-    </v-container> -->
+    <v-switch dark v-model="fetching" label="Auto update"/>
     <v-data-table
       sort-by="cash"
       :sort-desc="true"
@@ -38,7 +36,7 @@ export default {
       if (this.fetching == true) {
         this.fetch();
       }
-    }, 5000);
+    }, 90000);
   },
   name: "Chart",
 
