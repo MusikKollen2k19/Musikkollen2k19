@@ -78,7 +78,7 @@ export default {
       let self = this;
       let out = "";
 
-      console.log("Fetcxhing = ", this.fetching);
+      // console.log("Fetcxhing = ", this.fetching);
 
       self.info = [
         {
