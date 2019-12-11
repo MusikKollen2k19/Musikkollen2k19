@@ -7,8 +7,11 @@
       color="orange"
       :disabled="Loading"
       :loading="Loading"
-      light
+      dark
     >Uppdatera</v-btn>
+    <!-- <v-container>
+      <v-switch dark v-model="fetching" label="Auto update"/>
+    </v-container> -->
     <v-data-table
       sort-by="cash"
       :sort-desc="true"
@@ -31,9 +34,11 @@ import skol_lista from "@/assets/skolor.js";
 export default {
   created() {
     this.fetch();
-    // setInterval(function() {
-    //   this.fetch();
-    // }, 10000);
+    setInterval(() => {
+      if (this.fetching == true) {
+        this.fetch();
+      }
+    }, 5000);
   },
   name: "Chart",
 
@@ -41,6 +46,7 @@ export default {
     return {
       Messagedata: "dddffffjjjjjdd",
       Ansvar: "ty",
+      fetching: true,
       Siffra: 69,
       Loading: false,
       snackbar: false,
@@ -74,6 +80,8 @@ export default {
       let self = this;
       let out = "";
 
+      console.log("Fetcxhing = ", this.fetching);
+
       self.info = [
         {
           name: "Wijkmanska",
@@ -86,37 +94,32 @@ export default {
       // console.log(this.skolor);
 
       //Ändra denna URL så funkar för din API eller enhet
-      this.skolor
-        .forEach(element => {
-          axios.get(element.url).then(function(response) {
-            let re = /<h1 class="font-thick">.+kr/i;
-            out = response.data.match(re)[0];
-            let Tal = out
-              .replace('<h1 class="font-thick">', "")
-              .replace(" ", "")
-              .replace("kr", "");
+      this.skolor.forEach(element => {
+        axios.get(element.url).then(function(response) {
+          let re = /<h1 class="font-thick">.+kr/i;
+          out = response.data.match(re)[0];
+          let Tal = out
+            .replace('<h1 class="font-thick">', "")
+            .replace(" ", "")
+            .replace("kr", "");
 
-            let re2 = /<p>insamlat av .+ givare<\/p>/;
-            let out2 = response.data.match(re2)[0];
-            let Tal2 = out2.replace("<p>", "");
-            Tal2 = Tal2.replace("</p>", "");
+          let re2 = /<p>insamlat av .+ givare<\/p>/;
+          let out2 = response.data.match(re2)[0];
+          let Tal2 = out2.replace("<p>", "");
+          Tal2 = Tal2.replace("</p>", "");
 
-            self.info.push({
-              name: element.name,
-              cash: Tal,
-              antal: Tal2
-              // sida: '<a href="' + element.url + '"> hÄr </a>'
-            });
-            self.Loading = false;
+          self.info.push({
+            name: element.name,
+            cash: Tal,
+            antal: Tal2
+            // sida: '<a href="' + element.url + '"> hÄr </a>'
           });
-
-          // self.snackbar_text = parseInt(out);
-          // self.snackbar = true;
-        })
-        .catch(function(error) {
-          /* eslint-disable */
-          console.log(error);
+          self.Loading = false;
         });
+
+        // self.snackbar_text = parseInt(out);
+        // self.snackbar = true;
+      });
     }
   },
   links: [
