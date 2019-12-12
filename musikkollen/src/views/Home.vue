@@ -80,12 +80,7 @@ export default {
 
       // console.log("Fetcxhing = ", this.fetching);
 
-      self.info = [
-        {
-          name: "Wijkmanska",
-          cash: "0"
-        }
-      ];
+      self.info = [{}];
 
       self.Loading = true;
 
