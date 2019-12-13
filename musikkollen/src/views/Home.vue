@@ -59,8 +59,8 @@ export default {
           value: "name"
         },
         { text: "Pengar insamlat (kr)", value: "cash" },
-        { text: "Antal donationer", value: "antal" }
-        // { text: "Sida", value: "sida" }
+        { text: "Antal donationer", value: "antal" },
+        { text: "Kr/Elev", value: "elever" }
         // { text: "Senaste Uppdatering", value: "tid" }
       ],
       info: [
@@ -101,11 +101,13 @@ export default {
           let Tal2 = out2.replace("<p>", "");
           Tal2 = Tal2.replace("</p>", "");
 
+          let Tal3 = parseInt(Tal) / element.elever;
+
           self.info.push({
             name: element.name,
             cash: Tal,
-            antal: Tal2
-            // sida: '<a href="' + element.url + '"> hÄr </a>'
+            antal: Tal2,
+            elever: Math.round(Tal3)
           });
           self.Loading = false;
         });

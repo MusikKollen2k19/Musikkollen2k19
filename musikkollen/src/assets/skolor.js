@@ -2,51 +2,61 @@ export default [
   {
     url:
       "https://bossan.musikhjalpen.se/insamlingar/abbe-abb-industrigymnasium",
-    name: "ABB"
+    name: "ABB",
+    elever:280
   },
   {
     url:
       "https://bossan.musikhjalpen.se/insamlingar/rudbeckianska-gymnasiet-orginalet-sedan-1623",
-    name: "Rudbeck"
+    name: "Rudbeck",
+    elever:1350
   },
   {
     url:
       "https://bossan.musikhjalpen.se/insamlingar/grillska-gymnasiet-vasteras-for-musikhjalpen-2019",
-    name: "Grillska"
+    name: "Grillska",
+    elever:420
   },
   {
     url:
       "https://bossan.musikhjalpen.se/insamlingar/carlforsska-gymnasiet-i-vasteras-mot-sex-som-vapen",
-    name: "Carlforsska"
+    name: "Carlforsska",
+    elever:1100
   },
   {
     url:
       "https://bossan.musikhjalpen.se/insamlingar/hahrska-gymnasiet",
-    name: "Hahrska"
+    name: "Hahrska",
+    elever:370
   },
   {
     url:
       "https://bossan.musikhjalpen.se/insamlingar/jensen-gymnasium",
-    name: "Jensen"
+    name: "Jensen",
+    elever:320,
   },
   {
     url:
       "https://bossan.musikhjalpen.se/insamlingar/kunskapsgymnasiet-vasteras",
-    name: "Kunskap"
+    name: "Kunskap",
+    elever:200
   },
   {
     url:
       "https://bossan.musikhjalpen.se/insamlingar/malardalens-ridgymnasium",
-    name: "Malardalens Ridgymnasium"
+    name: "Malardalens Ridgymnasium",
+    elever:37
   },
   {
     url:
       "https://bossan.musikhjalpen.se/insamlingar/nti-gymnasiet",
-    name: "NTI"
+    name: "NTI",
+    elever:60
   },
   {
     url:
       "https://bossan.musikhjalpen.se/insamlingar/realgymnasiet-vasteras-for-musikhjalpen",
-    name: "Real"
+    name: "Real",
+    elever:180
   }
 ]
