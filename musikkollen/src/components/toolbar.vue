@@ -11,6 +11,13 @@
 
       <v-spacer></v-spacer>
 
+      <span id="text">POWERED BY 190S, AV MARTIN, WILLIAM S OCH ARTA</span>
+
+
+      <v-spacer>
+
+      </v-spacer>
+
       <v-toolbar-items>
         <!-- <v-btn v-for="(link, i) in links" :key="i" :to="link.path" color="primary">{{link.name}}</v-btn> -->
 
@@ -38,5 +45,10 @@ export default {
 <style scoped>
 #a5 {
   color: rgb(194, 151, 10);
+}
+#text {
+  color: white;
+  font-weight: bold;
+  font-size: 150%;
 }
 </style>
