@@ -80,7 +80,7 @@ export default {
 
       // console.log("Fetcxhing = ", this.fetching);
 
-      self.info = [{}];
+      self.info = [];
 
       self.Loading = true;
 
